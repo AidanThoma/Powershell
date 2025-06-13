@@ -1,0 +1,9 @@
+# This is a gitignore file! #
+#    My first ever one!     #
+
+# Folders
+John Savill*/
+
+# Files
+Scripts/Files/NetworkDevices.txt
+Scripts/FindDevices.ps1

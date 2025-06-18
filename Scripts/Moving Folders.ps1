@@ -7,33 +7,34 @@
 
 #>
 
-$ImagesFolder = dir -path "File Directory 1"
-$Images2Folder = dir -path "File Directory 2"
+$ImagesFolder = Get-ChildItem -path "C:\Users\athom\OneDrive\Desktop\Work\PowerShell Test\Scripts\Files\Dir1\"
+$Images2Folder = Get-ChildItem -path "C:\Users\athom\OneDrive\Desktop\Work\PowerShell Test\Scripts\Files\Dir2\"
 
 #   Check which folder is empty
 if ( ($ImagesFolder | Measure-Object).Count -eq 0 ) {
     $source = $Images2Folder
-    $sourcePath = "File Directory 1"
-    $destPath = "File Directory 2"
+    #$sourcePath = "C:\Users\athom\OneDrive\Desktop\Work\PowerShell Test\Scripts\Files\Dir2\"
+    $destPath = "C:\Users\athom\OneDrive\Desktop\Work\PowerShell Test\Scripts\Files\Dir1\"
     Write-Host "Moving Files to $destPath" -ForegroundColor Blue
 } 
 else  { 
     $source = $ImagesFolder
-    $sourcePath = "File Directory 1"
-    $destPath = "File Directory 2"
+    #$sourcePath = "C:\Users\athom\OneDrive\Desktop\Work\PowerShell Test\Scripts\Files\Dir1\"
+    $destPath = "C:\Users\athom\OneDrive\Desktop\Work\PowerShell Test\Scripts\Files\Dir2\"
     Write-Host "Moving Files to $destPath" -ForegroundColor Blue
 }
 foreach ($file in $source) {
     $dest = Join-Path -Path $destPath -ChildPath $file.Name
 
-    Write-Host "Moving: $($file.Name) to $dest" -BackgroundColor Black -ForegroundColor Green
+    Write-Host "Moving: $($file.Name) to $dest" -BackgroundColor Black -ForegroundColor White
 
     try {
         $file.MoveTo($dest)
-        Start-Sleep -Seconds 0
+        Start-Sleep -Milliseconds 500
     }
     catch {
         <#Do this if a terminating exception happens#>
         Write-Host "Failed to move $($file.Name) : $_" -ForegroundColor Red
     }
 }
+Write-Host "Files All Moved!" -ForegroundColor Green
